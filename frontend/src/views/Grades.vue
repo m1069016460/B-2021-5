@@ -96,7 +96,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="学期" prop="semester">
-          <el-input v-model="form.semester" placeholder="如：2024-2025-1" />
+          <el-select v-model="form.semester" placeholder="选择学期" style="width: 100%">
+            <el-option v-for="s in semesters" :key="s" :label="s" :value="s" />
+          </el-select>
         </el-form-item>
         <el-row :gutter="16">
           <el-col :span="12">
@@ -199,7 +201,9 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="学期">
-                <el-input v-model="pasteForm.semester" placeholder="如：2024-2025-1（可选）" />
+                <el-select v-model="pasteForm.semester" placeholder="选择学期（可选）" clearable style="width: 100%">
+                  <el-option v-for="s in semesters" :key="s" :label="s" :value="s" />
+                </el-select>
               </el-form-item>
             </el-col>
           </el-row>

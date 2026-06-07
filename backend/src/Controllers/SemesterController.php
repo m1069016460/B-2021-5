@@ -99,10 +99,10 @@ class SemesterController
         
         $semesterId = $this->semesterModel->create([
             'name' => $data['name'],
-            'start_date' => $data['startDate'] ?? null,
-            'end_date' => $data['endDate'] ?? null,
-            'status' => $data['status'] ?? 1,
-            'sort_order' => $data['sortOrder'] ?? 0
+            'start_date' => !empty($data['startDate']) ? $data['startDate'] : null,
+            'end_date' => !empty($data['endDate']) ? $data['endDate'] : null,
+            'status' => isset($data['status']) ? (int) $data['status'] : 1,
+            'sort_order' => isset($data['sortOrder']) ? (int) $data['sortOrder'] : 0
         ]);
         
         Logger::info("Semester created: {$data['name']}");
@@ -142,10 +142,10 @@ class SemesterController
         
         $updateData = [];
         if (isset($data['name'])) $updateData['name'] = $data['name'];
-        if (isset($data['startDate'])) $updateData['start_date'] = $data['startDate'];
-        if (isset($data['endDate'])) $updateData['end_date'] = $data['endDate'];
-        if (isset($data['status'])) $updateData['status'] = $data['status'];
-        if (isset($data['sortOrder'])) $updateData['sort_order'] = $data['sortOrder'];
+        if (isset($data['startDate'])) $updateData['start_date'] = !empty($data['startDate']) ? $data['startDate'] : null;
+        if (isset($data['endDate'])) $updateData['end_date'] = !empty($data['endDate']) ? $data['endDate'] : null;
+        if (isset($data['status'])) $updateData['status'] = (int) $data['status'];
+        if (isset($data['sortOrder'])) $updateData['sort_order'] = (int) $data['sortOrder'];
         
         if (!empty($updateData)) {
             $this->semesterModel->update($id, $updateData);

@@ -82,8 +82,10 @@
             <el-radio value="选修">选修</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="学期">
-          <el-input v-model="form.semester" placeholder="如：2024-2025-1" />
+        <el-form-item label="学期" prop="semester">
+          <el-select v-model="form.semester" placeholder="选择学期" style="width: 100%">
+            <el-option v-for="s in semesters" :key="s" :label="s" :value="s" />
+          </el-select>
         </el-form-item>
         <el-form-item label="授课教师">
           <el-select v-model="form.teacherId" placeholder="选择教师" clearable style="width: 100%">
@@ -125,7 +127,8 @@ const rules = {
   code: [{ required: true, message: '请输入课程代码', trigger: 'blur' }],
   name: [{ required: true, message: '请输入课程名称', trigger: 'blur' }],
   credits: [{ required: true, message: '请输入学分', trigger: 'blur' }],
-  courseType: [{ required: true, message: '请选择课程类型', trigger: 'change' }]
+  courseType: [{ required: true, message: '请选择课程类型', trigger: 'change' }],
+  semester: [{ required: true, message: '请选择学期', trigger: 'change' }]
 }
 
 async function fetchData() {
